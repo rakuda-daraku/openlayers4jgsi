@@ -303,7 +303,7 @@ OpenLayers.Layer.TMS4JGSI = OpenLayers.Class(
 		//
 		// Help Me! Who called getURL? 
 		//
-		if ( this._OnlyGrid4JGSI == 0 ) return null ;
+		if ( this._Only_Grid4JGSI == 0 ) return null ;
 		
 		var LB  = new OpenLayers.LonLat();
 		LB.lon = bounds.left   ;
