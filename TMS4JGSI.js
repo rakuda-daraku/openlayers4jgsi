@@ -272,7 +272,7 @@ OpenLayers.Layer.TMS4JGSI = OpenLayers.Class(
      */
     getURL: function (bounds) {
 	
-		// ------  Get URL of Šî”Õ’n}  -----------
+		// ------  Get URL of Šî”Õ’n}î•ñ  -----------
 		function getZeroPatString(value, len) {
 			var svalue = value.toString();
 			var slen = svalue.length;
