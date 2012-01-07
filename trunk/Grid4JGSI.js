@@ -28,7 +28,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
      *           performance somewhat when dragging, but will increase bandwidth
      *           use significantly. 
      */
-    _Only_Grid4JGSI_switch: 0,
+    _Only_Grid4JGSI: 0,
     buffer: 0,
 	isBaseLayer: false,
 	tileWidth:300,                                                        // 画像のサイズ 単位 px )
@@ -430,7 +430,7 @@ console.log(" ---------getTileOrigin --------------------");
     initGriddedTiles:function(proj_bounds) {
     
     
-    this._OnlyGrid4JGSI = 1 ; 
+    this._Only_Grid4JGSI = 1 ; 
     
         // 経緯度で処理行う。displayProjectionが経緯度のEPSG  例えば、EPSG:4326
 		var bounds     = proj_bounds.transform(this.map.projection,this.map.displayProjection);
@@ -566,7 +566,7 @@ console.log(" ---------getTileOrigin --------------------");
 		//now actually draw the tiles
 		this.spiralTileLoad();
 		
-		 this._OnlyGrid4JGSI = 0 ; 
+		 this._Only_Grid4JGSI = 0 ; 
 
     },
 
