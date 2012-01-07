@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>基盤地図情報の表示</title>
+ 
+        <link rel="stylesheet" type="text/css" href="http://openlayers.org/api/2.11/theme/default/style.css"  charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="http://openlayers.org/api/2.11/theme/default/google.css"  charset="utf-8" />
+		<style>
+		    body {
+		        height           : 100%;
+		        margin           : 0;
+		        padding          : 0;
+		        width            : 100%;
+		    }
+		    #map {
+		        border     : 10px;
+		        background : #7391ad;
+		        width      : 700px;
+		        height     : 500px;
+		    }
+		    
+		    div.olControlMousePosition {
+			    position: absolute;
+			    right: 5px;
+			    bottom: 1.5em;
+			    font-family: Arial;
+			    font-size: smaller;
+			}
+			
+			.olControlPanel {
+			    margin: 0px;
+			    left: 50px;
+			}
+			.olControlPanel div { 
+			    display:block;
+			    width:  24px;
+			    height: 24px;
+			    float: left; /* remove this if you want a vertical toolbar  */
+			    margin: 4px;
+			}
+
+			/* ZoomBox - zoom in */
+			.olControlZoomBoxInItemInactive { 
+			    background-image: url("./zoom-in-off.png");
+			    background-repeat: no-repeat;
+			    background-position: 0px 1px;
+			}
+			.olControlZoomBoxInItemActive { 
+			    background-image: url("./zoom-in-on.png");
+			    background-repeat: no-repeat;
+			    background-position: 0px 1px;
+			}
+
+			/* ZoomBox - zoom out */
+			.olControlZoomBoxOutItemInactive {
+			    background-image: url("./zoom-out-off.png");
+			    background-repeat: no-repeat;
+			    background-position: 0px 1px;
+			}
+			.olControlZoomBoxOutItemActive { 
+			    background-image: url("./zoom-out-on.png");
+			    background-repeat: no-repeat;
+			    background-position: 0px 1px;
+			}
+
+			/* DragPan */
+			.olControlDragPanItemInactive { 
+			    background-image: url("http://openlayers.org/api/2.11/theme/default/img/pan_off.png");
+			    background-repeat: no-repeat;
+			    background-position: 0px 1px;
+			}
+			.olControlDragPanItemActive { 
+			    background-image: url("http://openlayers.org/api/2.11/theme/default/img/pan_on.png");
+			    background-repeat: no-repeat;
+			    background-position: 0px 1px;
+			}
+
+		</style>
+		
+		<script type="text/javascript" src="http://proj4js.org/lib/proj4js-compressed.js"></script>
+	    <!-- google Maps API V3  Keyは不要になりました -->
+        <script  type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+        <script  type="text/javascript" src="http://openlayers.org/api/2.11/OpenLayers.js"></script>
+		<script  type="text/javascript" src="./Grid4JGSI.js" charset="utf-8"></script>
+		<script  type="text/javascript" src="./TMS4JGSI.js" charset="utf-8"></script>
+		<script  type="text/javascript" src="./Image4JGSI.js" charset="utf-8"></script>
+		<script  type="text/javascript" src="./Crosshairs.js" charset="utf-8"></script>
+
+        <script type="text/javascript">
+            
+             // pink tile avoidance
+             OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
+             // make OL compute scale according to WMS spec
+             OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
+            
+            
+            var map;
+           	var map_options = {
+				controls: [ new OpenLayers.Control.MouseDefaults() ],
+				projection: new OpenLayers.Projection("EPSG:900913"),       // 地図の座標系
+				displayProjection: new OpenLayers.Projection("EPSG:4326"),  // 地図の表示
+				units: "m",
+
+				minZoomLevel: 8,
+				maxZoomLevel: 21,
+				numZoomLevels : 14,
+				maxExtent: new OpenLayers.Bounds(-20037508.3427892,-20037508.3427892,20037508.3427892,20037508.3427892 )
+			};
+            
+            function init(){
+                map = new OpenLayers.Map('map', map_options);
+
+
+				gmap = new OpenLayers.Layer.Google(
+               			"Google (地図）", // the default
+               			{
+               			'sphericalMercator': true,
+               			'displayInLayerSwitcher':true,
+               			opacity: 1.0,
+               			minZoomLevel: 8,
+               			maxZoomLevel: 21}
+					);
+				map.addLayers([gmap]);
+
+		        var JGSI = new OpenLayers.Layer.TMS4JGSI("基盤地図情報",
+		              "http://localhost/data/7.5fgd/new",   // dummy url
+		              {
+		               maxExtent: new OpenLayers.Bounds(-20037508.3427892,-20037508.3427892,20037508.3427892,20037508.3427892), 
+		               units:'m',
+		               projection: "EPSG:900913",
+					   displayProjection: new OpenLayers.Projection("EPSG:4326"),
+		               type: "png",
+		               transitionEffect: 'resize',
+		               transparent: true,
+		               maxResolution:"auto",   // 初期表示時に表示するためにはauto
+		//             'visibility': false,
+		               isBaseLayer:true,
+		               'sphericalMercator': true,
+		               'displayInLayerSwitcher':true,
+		               opacity: 1.0
+		               ,minZoomLevel: 8
+		               ,maxZoomLevel: 21
+		               ,numZoomLevels : 14
+		               }
+
+		         );
+		         map.addLayer(JGSI);
+		         
+                var OL_JGSI = new OpenLayers.Layer.TMS4JGSI("基盤地図情報",
+		              "http://localhost/data/7.5fgd/new",  // dummy url
+		               {
+		               maxExtent: new OpenLayers.Bounds(-20037508.3427892,-20037508.3427892,20037508.3427892,20037508.3427892), 
+		               units:'m',
+		               projection: "EPSG:900913",
+					   displayProjection: new OpenLayers.Projection("EPSG:4326"),
+		               type: "png",
+		               transitionEffect: 'resize',
+		               transparent: true,
+		               maxResolution:"auto",   // 初期表示時に表示するためにはauto
+		               'visibility': false,
+		               isBaseLayer:false,
+		               'sphericalMercator': true,
+		               'displayInLayerSwitcher':true,
+		               opacity: 0.5
+		               ,minZoomLevel: 8
+		               ,maxZoomLevel: 21
+		               ,numZoomLevels : 14
+                		}
+	            );
+	            
+	            map.addLayer(OL_JGSI);
+				// Add map controls
+				map.addControl(new OpenLayers.Control.Navigation());
+				map.addControl(new OpenLayers.Control.Attribution());
+			    map.addControl(new OpenLayers.Control.Scale());
+			    map.addControl(new OpenLayers.Control.MousePosition()); 
+			    map.addControl(new OpenLayers.Control.PanZoomBar());  
+                map.addControl(new OpenLayers.Control.LayerSwitcher());
+ 
+			 	// 真ん中の＋
+				var crosshairsCtrl = new OpenLayers.Control.Crosshairs({
+					imgUrl:  "./img/crosshairs.png",
+					size: new OpenLayers.Size(32, 32),
+					position: new OpenLayers.Pixel(map.getCurrentSize().w/2, map.getCurrentSize().h/2)
+				});
+				map.addControl(crosshairsCtrl); // auto activate
+                
+                var oZoomBoxInCtrl = new OpenLayers.Control.ZoomBox({
+           			displayClass: 'olControlZoomBoxIn',
+           		    title       : '2点拡大:左ボタンを押した状態でマウスを移動してください'      
+    			});
+    			var oZoomBoxOutCtrl = new OpenLayers.Control.ZoomBox({
+                    out : true,
+                    displayClass: 'olControlZoomBoxOut',
+                    title       : '2点縮小:左ボタンを押した状態でマウスを移動してください'      
+                });   
+                var oDragPanCtrl = new OpenLayers.Control.DragPan({
+                   isDefault: true,
+                   title: '地図移動:左ボタンを押した状態で地図を移動してください'
+                });
+    			var oNavCtrl = new OpenLayers.Control.NavigationHistory();
+    			map.addControl(oNavCtrl);
+    			oNavCtrl.activate();
+
+    			oNavCtrl.previous.title = '前へ';
+    			oNavCtrl.next.title = '次へ';
+                
+                var oPanel = new OpenLayers.Control.Panel();
+    			oPanel.addControls([
+    				oZoomBoxInCtrl,
+            		oZoomBoxOutCtrl,
+            		oDragPanCtrl,
+            		oNavCtrl.previous,
+            		oNavCtrl.next
+            	]);
+                map.addControl(oPanel);
+                
+                var keyboard = new OpenLayers.Control.KeyboardDefaults();
+                map.addControl(keyboard);
+
+    			// if you want to use Geographic coords, transform to ESPG:900913
+    			var ddBounds = new OpenLayers.Bounds(
+        			135.20,34.34,135.28,34.36
+    			);
+    			map.zoomToExtent(
+        			ddBounds.transform(map.displayProjection, map.getProjectionObject())
+    			);
+
+            }
+        </script>
+    </head>
+    <body onload="init()">
+        <div id="map" class="smallmap"></div>
+    </body>
+</html>
