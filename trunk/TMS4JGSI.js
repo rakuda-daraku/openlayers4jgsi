@@ -216,6 +216,8 @@ OpenLayers.Layer.TMS4JGSI = OpenLayers.Class(
 				};
 		});
 
+		if(this.visibility === false ) this.poweredBy.style.display = "none"; 
+		
         // RESOLUTIONSAunits ‹y‚Ñ projection‚ÌÄ’è‹`
         if (this.sphericalMercator) {
             OpenLayers.Util.extend(this, OpenLayers.Layer.SphericalMercator);
