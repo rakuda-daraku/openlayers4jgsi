@@ -306,14 +306,15 @@ OpenLayers.Layer.TMS4JGSI = OpenLayers.Class(
 		// Help Me! Who called getURL? 
 		//
 		if ( this._Only_Grid4JGSI == 0 ) return null ;
+		var zoom = this.getZoom();
+		if(isNaN(zoom)) return null ;
 		
 		var LB  = new OpenLayers.LonLat();
 		LB.lon = bounds.left   ;
 		LB.lat = bounds.bottom ;
 		LB=LB.transform(this.map.projection, this.map.displayProjection);
 
-		var zoom = this.getZoom();
-        
+
         var x = Math.round(LB.lon*360000);
         var y = Math.round(LB.lat*360000);
 		

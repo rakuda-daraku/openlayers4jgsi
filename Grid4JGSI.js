@@ -49,7 +49,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 		{
 			level: 15360,
 			scale: 5000000,
-			scaleRange: { lower:5000000, upper:8999999 },
+			scaleRange: { lower:5000000, upper:9000000 },
 			displayLevel : 10000,
 			resolution: { x:0.014222222222222223, y:0.011329940252268201 },
 			lt: { x:110.93333333333333, y:59.73333333333333 },
@@ -61,7 +61,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 		{
 			level: 7680,
 			scale: 2400000,
-			scaleRange: { lower:2400000, upper:4999999 },
+			scaleRange: { lower:2400000, upper:5000000 },
 			displayLevel : 3000,
 			resolution: { x:0.007111111111111111, y:0.005757121439280361 },
 			lt: { x:115.2, y:53.33333333333333 },
@@ -73,7 +73,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 		{
 			level: 3840,
 			scale: 1200000,
-			scaleRange: { lower:1200000, upper:2399999 },
+			scaleRange: { lower:1200000, upper:2400000 },
 			displayLevel : 3000,
 			resolution: { x:0.00345945945945946, y:0.002930134603058328 },
 			lt: { x:118.4, y:49.06666666666666 },
@@ -85,7 +85,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 		{
 			level: 1920,
 			scale: 600000,
-			scaleRange: { lower:600000, upper:1199999 },
+			scaleRange: { lower:600000, upper:1200000 },
 			displayLevel : 3000,
 			resolution: { x:0.001777777777777778, y:0.0014555615120944818 },
 			lt: { x:120, y:48.53333333333333 },
@@ -97,7 +97,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 		{
 			level: 960,
 			scale: 300000,
-			scaleRange: { lower:300000, upper:599999 },
+			scaleRange: { lower:300000, upper:600000 },
 			displayLevel : 200,
 			resolution: { x:0.0008815426997245183, y:0.0007325233315724598 },
 			lt: { x:120.266666666666666, y:47.73333333333333 },
@@ -109,7 +109,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 		{
 			level: 480,
 			scale: 150000,
-			scaleRange: { lower:150000, upper:299999 },
+			scaleRange: { lower:150000, upper:300000 },
 			displayLevel : 200,
 			resolution: { x:0.00044444444444444425, y:0.0003651559667991687 },
 			lt: { x:120.666666666666666, y:47.466666666666666 },
@@ -121,7 +121,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 		{
 			level: 240,
 			scale: 75000,
-			scaleRange: { lower:75000, upper:149999 },
+			scaleRange: { lower:75000, upper:150000 },
 			displayLevel : 200,
 			resolution: { x:0.0002222222222222222, y:0.00018266812441229002 },
 			lt: { x:121, y:47.066666666666666 },
@@ -133,7 +133,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 		{
 			level: 120,
 			scale: 36000,
-			scaleRange: { lower:36000, upper:74999 },
+			scaleRange: { lower:36000, upper:75000 },
 			displayLevel : 50,
 			resolution: { x:0.0001111111111111111, y:0.00009013505258105335 },
 			lt: { x:122, y:46.033333333333333 },
@@ -145,7 +145,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 		{
 			level: 60,
 			scale: 18000,
-			scaleRange: { lower:18000, upper:35999 },
+			scaleRange: { lower:18000, upper:36000 },
 			displayLevel : 25,
 			resolution: { x:0.00005555555555555556, y:0.000045938749511900786 },
 			lt: { x:122, y:45.999999999999999 },
@@ -157,7 +157,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 		{
 			level: 30,
 			scale: 9000,
-			scaleRange: { lower:9000, upper:17999 },
+			scaleRange: { lower:9000, upper:18000 },
 			displayLevel : 25,
 			resolution: { x:0.00002777777777777778, y:0.00002296176777351219 },
 			lt: { x:122, y:45.999999999999999 },
@@ -169,7 +169,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 		{
 			level: 15,
 			scale: 4500,
-			scaleRange: { lower:4500, upper:8999 },
+			scaleRange: { lower:4500, upper:9000 },
 			displayLevel : 25,
 			resolution: { x:0.00001388888888888889, y:0.000011479028697571744 },
 			lt: { x:122, y:45.999999999999999 },
@@ -181,7 +181,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 		{
 			level: 7.5,
 			scale: 2500,
-			scaleRange: { lower:500, upper:4499 },
+			scaleRange: { lower:1000, upper:4500 },
 			displayLevel : 0.5,
 			resolution: { x:0.000006944444444444445, y:0.000005739060798285698 },
 			lt: { x:122, y:45.999999999999999 },
@@ -189,11 +189,11 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 			url: "http://cyberjapandata.gsi.go.jp/data/7.5fgd/new",
 			suffix :'-img.png',
 			currentAlt: "FGD_L"
-		},
+		}  /* ,
 		{
 			level: 3,
 			scale: 1000,
-			scaleRange: { lower:0, upper:499 },
+			scaleRange: { lower:100, upper:1000 },
 			displayLevel : 0.5,
 			resolution: { x:0.000002777777777777778, y:0.0000022955091982377905 },
 			lt: { x:122, y:45.999999999999999 },
@@ -201,7 +201,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 			url: "",
 			suffix :'-img.png',
 			currentAlt: null
-		}
+		} */
 	],
 	
 	
@@ -222,7 +222,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
 				return i;
 			}
 		}
-		return 0;
+		return "Not Found" ;
 	},
 
     /**
