@@ -391,7 +391,12 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
     },
     
 	calcHeight: function(lat, width) {
-		return Math.floor(width/Math.cos(lat*Math.PI/180.00));
+	    if ( this.map.projection == "EPSG:4326")  {
+	    	return width;
+	    }
+	    else {
+			return Math.floor(width/Math.cos(lat*Math.PI/180.00));
+		}
 	},
 	
     /**
@@ -406,7 +411,7 @@ OpenLayers.Layer.Grid4JGSI = OpenLayers.Class(OpenLayers.Layer.Grid, {
      * {<OpenLayers.LonLat>} The tile origin.
      */
     getTileOrigin: function() {
-console.log(" ---------getTileOrigin --------------------"); 
+// console.log(" ---------getTileOrigin --------------------"); 
         var origin = this.tileOrigin;
         if (!origin) {
             var extent = this.getMaxExtent();
@@ -535,7 +540,6 @@ console.log(" ---------getTileOrigin --------------------");
 				var px = new OpenLayers.Pixel(x, y);
 				tileBounds =  tileBounds.transform(this.map.displayProjection,this.map.projection);
 				
-				
 				var tile = row[colidx++];
 				if (!tile) {
 					tile = this.addTile(tileBounds, px, new OpenLayers.Size(tileWidth, curTileHeight));
@@ -579,7 +583,7 @@ console.log(" ---------getTileOrigin --------------------");
      * {OpenLayers.Bounds}
      */
     getMaxExtent: function() {
-console.log(" ---------getMaxExten --------------------"); 
+// console.log(" ---------getMaxExten --------------------"); 
         return this.maxExtent;
     },
     
@@ -715,7 +719,7 @@ console.log(" ---------getMaxExten --------------------");
      *                          if false, then append to end
      */
     shiftRow:function(prepend) {
-console.log(" ---------shiftRow --------------------");  
+// console.log(" ---------shiftRow --------------------");  
  		var modelRowIndex = (prepend) ? 0 : (this.grid.length - 1);
 		var grid = this.grid;
 		var modelRow = grid[modelRowIndex];
@@ -769,7 +773,7 @@ console.log(" ---------shiftRow --------------------");
      *                          if false, then append to end
      */
     shiftColumn: function(prepend) {
-console.log(" ---------shiftColumn --------------------");  
+// console.log(" ---------shiftColumn --------------------");  
  		var zoom = this.getZoom();
 		var degDelta = this.SCALE_DATA[zoom].level/3600;
 		

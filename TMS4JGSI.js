@@ -340,16 +340,6 @@ OpenLayers.Layer.TMS4JGSI = OpenLayers.Class(
     setMap: function(map) {
         OpenLayers.Layer.prototype.setMap.apply(this, arguments);
 		OpenLayers.Layer.FixedZoomLevels.prototype.initResolutions.apply(this);
-/*
-        console.log(" -- TMS4JGSI  setMap 2 ----");
-        console.log(" --              THIS RESOLUTIONS=%s %s",this.minResolution,this.maxResolution);
-        console.log(" --              gmap RESOLUTIONS=%s %s",gmap.minResolution,gmap.maxResolution);
-        console.log(" --              MAP  ZOOM LEVEL=%s %s %s",this.map.minZoomLevel,this.map.maxZoomLevel,this.map.numZoomLevels);
-        console.log(" --              THIS ZOOM LEVEL=%s %s %s",this.minZoomLevel,this.maxZoomLevel,this.numZoomLevels);
-        console.log(" --              gmap ZOOM LEVEL=%s %s %s",gmap.minZoomLevel,gmap.maxZoomLevel,gmap.numZoomLevels);
-        console.log(" --              getExtent=%s  %s",this.getExtent(),gmap.getExtent());
-        console.log(" --              getResolutions=%s   %s",this.getResolution(),gmap.getResolution());
-*/
 
         OpenLayers.Layer.Grid4JGSI.prototype.setMap.apply(this, arguments);
         if (!this.tileOrigin) { 

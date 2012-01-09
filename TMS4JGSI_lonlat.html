@@ -100,61 +100,18 @@
             var map;
            	var map_options = {
 				controls: [ new OpenLayers.Control.MouseDefaults() ],
-				projection: new OpenLayers.Projection("EPSG:900913"),       // 地図の座標系
-				displayProjection: new OpenLayers.Projection("EPSG:4326"),  // 地図の表示
-				units: "m",
-
+				maxExtent: new OpenLayers.Bounds(-180,-90,180,90),
+				projection: new OpenLayers.Projection("EPSG:4326"),         // 地図の座標系  mapの初期値
+				displayProjection: new OpenLayers.Projection("EPSG:4326"),  // 地図の表示   
+				units: "degrees",
 				minZoomLevel: 8,
 				maxZoomLevel: 21,
-				numZoomLevels: 14,
-				maxExtent: new OpenLayers.Bounds(-20037508.3427892,-20037508.3427892,20037508.3427892,20037508.3427892 )
+				numZoomLevels: 14
 			};
-			
             
             function init(){
-                map = new OpenLayers.Map('map', map_options);
+                 map = new OpenLayers.Map('map', map_options);
 
-
-		        var JGSI = new OpenLayers.Layer.TMS4JGSI(
-		        	"基盤地図情報",
-		            null,   // dummy url
-		            {
-		               maxExtent: new OpenLayers.Bounds(-20037508.3427892,-20037508.3427892,20037508.3427892,20037508.3427892), 
-		               units:'m',
-		               projection: new OpenLayers.Projection("EPSG:900913"),
-					   displayProjection: new OpenLayers.Projection("EPSG:4326"), 
-		               type: "png",
-		               transitionEffect: 'resize',
-		               transparent: true,
-		               maxResolution:156543.03390625,   
-		               'visibility': false,
-		               isBaseLayer:true,
-		               'sphericalMercator': true,
-		               'displayInLayerSwitcher':true,
-		               opacity: 1.0
-		               ,minZoomLevel: 8
-		               ,maxZoomLevel: 21
-		               ,numZoomLevels: 14
-		            }
-		         );
-		         map.addLayer(JGSI);
-		         
-				var gmap = new OpenLayers.Layer.Google(
-               		"Google (地図）", // default
-               		{
-               			'sphericalMercator': true
-               			,'displayInLayerSwitcher':true
-               			,opacity: 1.0
-               			,minZoomLevel: 8
-               			,maxZoomLevel: 21
-               			,numZoomLevels: 14
-               		}
-				
-				);
-				map.addLayer(gmap);
-				
-
-				
 				var kibanwms = new OpenLayers.Layer.WMS(
 					"KIBAN 25000 WMS",
 				    "http://www.finds.jp/ws/kiban25000gwc.cgi?",
@@ -167,8 +124,7 @@
 																  // 明示的に指定しています。
 						,attribution: "<a target='_blank' href='http://www.finds.jp/wsdocs/kibanwms/index.html'>基盤地図情報(平20業使、第449号)</a>;"
 						,isBaseLayer: true
-						,maxResolution: 156543.0339
-						,maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34)
+						,maxExtent: new OpenLayers.Bounds(-180,-90,180,90)
 						,minZoomLevel: 0
 						,maxZoomLevel: 18
 						,numZoomLevels:19
@@ -176,30 +132,65 @@
 				);
 				map.addLayer(kibanwms);
 
-                var OL_JGSI = new OpenLayers.Layer.TMS4JGSI(
-                	"基盤地図情報",
-		            null,  // dummy url
-		            {
-		               maxExtent: new OpenLayers.Bounds(-20037508.3427892,-20037508.3427892,20037508.3427892,20037508.3427892), 
-		               units:'m',
-		               projection: new OpenLayers.Projection("EPSG:900913"),
-					   displayProjection: new OpenLayers.Projection("EPSG:4326"), 
+		        var JGSI = new OpenLayers.Layer.TMS4JGSI("基盤地図情報",
+		              "http://localhost/data/7.5fgd/new",   // dummy url
+		              {
+		               maxExtent: new OpenLayers.Bounds(-180,-90,180,90),
+		               units:'degree',
+		               projection: new OpenLayers.Projection("EPSG:4326"),
+					   displayProjection: new OpenLayers.Projection("EPSG:4326"), // 無効(mapに値を設定する必要がある)
 		               type: "png",
 		               transitionEffect: 'resize',
 		               transparent: true,
-		               maxResolution:156543.03390625,   
+		               maxResolution:"auto",   // 初期表示時に表示するためにはauto
+		               isBaseLayer:true,
+	//	               'sphericalMercator': true,
+		               'displayInLayerSwitcher':true,
+		               opacity: 1.0
+		               ,minZoomLevel: 8
+		               ,maxZoomLevel: 21
+		               ,numZoomLevels: 14
+		               }
+
+		         );
+		         map.addLayer(JGSI);
+
+				var vmap0 = new OpenLayers.Layer.WMS( "OpenLayers WMS", 
+                	"http://vmap0.tiles.osgeo.org/wms/vmap0", 
+	                	{
+	                	layers: 'basic'
+		               ,minZoomLevel: 8
+		               ,maxZoomLevel: 21
+		               ,numZoomLevels: 14,
+	                	} 
+                );
+                	
+            	map.addLayer(vmap0);
+				                 
+
+                var OL_JGSI = new OpenLayers.Layer.TMS4JGSI("基盤地図情報",
+		              "http://localhost/data/7.5fgd/new",  // dummy url
+		               {
+		               maxExtent: new OpenLayers.Bounds(-180,-90,180,90),
+		               units:'degree',
+		               projection: new OpenLayers.Projection("EPSG:4326"),
+					   displayProjection: new OpenLayers.Projection("EPSG:4326"), // 無効(mapに値を設定する必要がある)
+		               type: "png",
+		               transitionEffect: 'resize',
+		               transparent: true,
+		               maxResolution:"auto",   // 初期表示時に表示するためにはauto
 		               'visibility': false,
 		               isBaseLayer:false,
-		               'sphericalMercator': true,
+	//	               'sphericalMercator': true,
 		               'displayInLayerSwitcher':true,
 		               opacity: 0.4
 		               ,minZoomLevel: 8
 		               ,maxZoomLevel: 21
 		               ,numZoomLevels: 14
-		            }
-		         );
+                		}
+	            );
 	            map.addLayer(OL_JGSI);
-
+				
 				// Add map controls
 				map.addControl(new OpenLayers.Control.Navigation());
 				map.addControl(new OpenLayers.Control.Attribution());
@@ -249,10 +240,8 @@
                 var keyboard = new OpenLayers.Control.KeyboardDefaults();
                 map.addControl(keyboard);
 
-    			// if you want to use Geographic coords, transform to ESPG:900913
-    			var lonlat = new OpenLayers.LonLat(135.23924, 34.35960);
-    			lonlat = lonlat.transform(map.displayProjection, map.getProjectionObject());
-    			map.setCenter(lonlat, 7);
+    			// if you want to use Geographic coords, don't transform to ESPG:900913
+    			map.setCenter(new OpenLayers.LonLat(135.23924, 34.35960), 15);
 
             }
         </script>
